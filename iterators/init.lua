@@ -66,4 +66,6 @@ end
 _M.keys   = _M.first
 _M.values = _M.second
 
+_M.__index = _M
+
 return _M

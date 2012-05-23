@@ -75,4 +75,7 @@ _M.values = _M.second
 
 _M.__index = _M
 
+-- XXX modify select to accept multiple indices
+-- XXX add function to swap k, v -> v, k
+
 return _M

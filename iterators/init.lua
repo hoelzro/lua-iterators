@@ -29,6 +29,9 @@ function _M:pairs()
   return setmetatable({ __state = self }, mt), self, nil
 end
 
+function _M:ipairs()
+end
+
 function _M:select(index)
   local mt = {}
 

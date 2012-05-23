@@ -34,10 +34,8 @@ function _M.wrap(f)
   end
 end
 
-_M.pairs = _M.wrap(pairs)
-
-function _M:ipairs()
-end
+_M.pairs  = _M.wrap(pairs)
+_M.ipairs = _M.wrap(ipairs)
 
 function _M:select(index)
   local outerself = self

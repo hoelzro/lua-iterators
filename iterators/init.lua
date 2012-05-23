@@ -16,38 +16,33 @@ function _M:clone()
   return setmetatable({}, { __index = self })
 end
 
-function _M:pairs()
+function _M.create(f, s, v)
   local mt = {}
 
-  -- XXX refactor
   function mt:__call(s, v)
-    return next(s, v)
+    return f(self.__state, v)
   end
 
   mt.__index = _M
 
-  return setmetatable({ __state = self }, mt), self, nil
+  return setmetatable({ __state = s }, mt)
+end
+
+function _M:pairs()
+  return _M.create(pairs(self))
 end
 
 function _M:ipairs()
 end
 
 function _M:select(index)
-  local mt = {}
-
   local outerself = self
 
-  -- XXX refactor
-  function mt:__call(s, v)
+  return _M.create(function(s, v)
     local vars = capture_all(outerself(s, v))
     return vars[index]
-  end
-
-  mt.__index = _M
-
-  return setmetatable({ __state = self.__state }, mt), self.__state, nil
+  end, self.__state, nil)
 end
-
 
 function _M:each(fn)
   local f, s, v = self, self.__state, nil

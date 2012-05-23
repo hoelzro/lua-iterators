@@ -12,6 +12,10 @@ local function capture_all(...)
   }
 end
 
+function _M:clone()
+  return setmetatable({}, { __index = self })
+end
+
 function _M:pairs()
   local mt = {}
 

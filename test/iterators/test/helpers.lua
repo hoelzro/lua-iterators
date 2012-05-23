@@ -22,6 +22,23 @@ function _M.assert_set_equal(lhs, rhs)
   lunit.assert_true(true)
 end
 
+function _M.assert_list_equal(lhs, rhs)
+  if #lhs ~= #rhs then
+    lunit.fail()
+  end
+
+  for i, v in ipairs(lhs) do
+    local v2 = rhs[i]
+
+    if v ~= v2 then
+      lunit.fail()
+      return
+    end
+  end
+
+  lunit.assert_true(true)
+end
+
 function _M.assert_hash_equal(lhs, rhs)
   for k, v in pairs(lhs) do
     local v2 = rhs[k]

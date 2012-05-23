@@ -28,9 +28,13 @@ function _M.create(f, s, v)
   return setmetatable({ __state = s }, mt)
 end
 
-function _M:pairs()
-  return _M.create(pairs(self))
+function _M.wrap(f)
+  return function(...)
+    return _M.create(f(...))
+  end
 end
+
+_M.pairs = _M.wrap(pairs)
 
 function _M:ipairs()
 end
